@@ -120,9 +120,38 @@ class SortingRobot:
         Keep going through list making comparisons. If can_move_right returns False, check if robot can move left, if it can move left. Loop and do so until it reaches position 0?
         
         """
+        # if light not on, turn it on
         if not self.light_is_on():
             self.set_light_on()
+        
+        # while the light is on, perform:
+        while self.light_is_on():
+            # if either compared item is None, swap them
+            if self.compare_item() == None:
+                self.swap_item()
 
+            # while the robot can move right, compare items
+            while self.can_move_right():
+                # if either compared item is None, swap them and move right
+                if self.compare_item() == None:
+                    self.swap_item()
+                    self.move_right()
+                    
+                # if held item is greater than item in the last position in the list and robot can no longer move right, swap the items.
+                if self.compare_item() == -1 and not self.can_move_right():
+                    self.move_left()
+                    self.swap_item()
+                # if held item is less than item at current list position, swap items
+                elif self.compare_item() == -1:
+                    if self.can_move_right():
+                        self.swap_item()
+                        self.move_right()
+                # if held item is greater than item at current list position, move right
+                elif self.compare_item() == 1:
+                    self.move_right()
+            else:
+                while self.can_move_left():
+                    self.move_left()
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
