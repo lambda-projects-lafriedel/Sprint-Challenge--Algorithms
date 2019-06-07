@@ -149,8 +149,11 @@ class SortingRobot:
         
         # while the light is on, perform:
         while self.light_is_on():
-
+            # This always swaps the item including the first time, to get None in the list
             self.swap_item()
+
+            if self.compare_item() == None and self.can_move_right() == False:
+                self.set_light_off()
 
             # while the robot can move right, compare items
             while self.can_move_right():
@@ -161,14 +164,16 @@ class SortingRobot:
                 self.move_right()
                 # if held item is less than item at current list position, move right
                 if self.compare_item() == -1:
-                    self.move_right()
+                    continue
                 # if held item is greater than item at current list position, swap items
                 elif self.compare_item() == 1:
                     self.swap_item()
-                    self.move_right()
-            else:
-                while self.can_move_left() and self.compare_item() != None:
+            
+            while self.can_move_left() and self.compare_item() != None:
                     self.move_left()
+            
+            self.swap_item()
+            self.move_right()
 
             # if self.compare_item() == None:
             #     self.swap_item()
