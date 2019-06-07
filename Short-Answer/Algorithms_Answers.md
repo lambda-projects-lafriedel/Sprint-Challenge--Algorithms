@@ -38,3 +38,5 @@ Building is n stories tall (a finite amount)
 Egg breaks if thrown off floor f or greater than floor f. So Floors f --> n is when the egg will break.
 
 I'd use a binary search/divide and conquer algorithm to find at what floor the eggs would break. If I had a building of 10 floors, I'd divide the list in half and start with floor 5. If I drop an egg from there and it doesn't break, I'd discard the lower half of the floors and only search in floors 6 - 10. I'd divide that half of the list in half, and test my dropped egg at floor 8. If it breaks, I'd discard the floors higher than 8 and search within floors 6 and 7. Since I'd divide this in half, I'd test floor 7. If it breaks there, we know we need to test floor 6, and if it breaks on floor 6 then that's the floor at which an egg first breaks. If we test floor 7 and it doesn't break, then we know that it also wouldn't break at floor 6, meaning the first floor at which an egg would break is 8.
+
+The runtime complexity of this approach is O(log n), since the amount of operations is cut in half at every division.
