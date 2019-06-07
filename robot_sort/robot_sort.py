@@ -95,9 +95,33 @@ class SortingRobot:
     def sort(self):
         """
         Sort the robot's list.
+        Must sort numbers from smallest to largest.
+        Doesn't return anything. Just performs the sort. The list gets returned when robot._list is printed.
+
+        Robot starts at list[0]. So if robot can move right, perform some operations.
+
+        Robot needs to be able to grab the first element since the class is instantiated with None. How do I do this?
+
+        if robot's item is none, swap item?
+        I think at the end, the last thing we'll have to do is swap the last sorted item with item, so that None goes back to the current item being held. Until then, there will alway be one item in the list that is None
+
+        Steps
+        Set light on. On == true self.set_light_on
+        While light is on, (while self.light_is_on) loop through the list. The light will be turned off at the end, once it is done sorting, and that is how we'll break out of the while loop.
+
+        If self.compare_item == None, swap item (so that None enters the list, and list[0] becomes currently held item)
+
+        Check if robot can move right, and if so, move right. This will put us at position 1.
+
+        Compare item. If compare item returns -1, check if can move right, if true, move right. Puts us at l[2].
+
+        Compare item. If compare item returns 1, swap item.
+
+        Keep going through list making comparisons. If can_move_right returns False, check if robot can move left, if it can move left. Loop and do so until it reaches position 0?
+        
         """
-        # Fill this out
-        pass
+        if not self.light_is_on():
+            self.set_light_on()
 
 
 if __name__ == "__main__":
