@@ -109,15 +109,14 @@ class SortingRobot:
             while self.can_move_right():
                 
                 self.move_right()
-                # if held item is less than item at current list position, move right
-                if self.compare_item() == -1:
+
+                # if held item is less than or equal to item at current list position, move right
+                if self.compare_item() == -1 or self.compare_item() == 0:
                     continue
                 # if held item is greater than item at current list position, swap items
                 elif self.compare_item() == 1:
                     self.swap_item()
-                # if held item is equal with item at current list position, continue
-                elif self.compare_item() == 0:
-                    continue
+                    
             else:
                 while self.can_move_left() and self.compare_item() != None:
                     self.move_left()
