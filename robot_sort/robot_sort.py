@@ -93,56 +93,6 @@ class SortingRobot:
         return self._light == "ON"
 
     def sort(self):
-        '''
-        Sort the robot's list.
-        Must sort numbers from smallest to largest.
-        Doesn't return anything. Just performs the sort. The list gets returned when robot._list is printed.
-
-        **Robot starts at list[0]. So if robot can move right, perform some operations.
-
-        Robot needs to be able to grab the first element since the class is instantiated with None. How do I do this?
-
-        if robot's item is none, swap item?
-        I think at the end, the last thing we'll have to do is swap the last item to be sorted with None, so that None goes back to the current item being held. Until then, there will alway be one item in the list that is None
-
-        Notes, attempt 2:
-        Use light to signify if a sort happened?
-
-        I can't make it do multiple loops that push it all the way back to position 0, because it has no way of knowing when to stop. With the restraints I can't tell it how many times to loop or when it should break out of the loop. So I either need to do one iteration through the whole list, or manually move left and right...
-
-        Use "None" as signifier of end of list? Move None through? Placeholder for sorted item?
-
-        If None is placeholder for item, that means it needs to find the smallest item on the first go. Then second, then third, etc.
-
-        While light is on:
-            While robot can move right:
-                move right
-                compare items...if -1,  don't do anything but if 1, swap item
-
-                Once item is swapped, keep going until the current item gets to the end of the list
-                move the current item to the place where None is -- gotta go left
-                Move None right and swap again so that None is in the next index
-                
-
-        '''
-
-        '''
-        Steps, attempt 1
-        
-        Set light on. On == true self.set_light_on
-        While light is on, (while self.light_is_on) loop through the list. The light will be turned off at the end, once it is done sorting, and that is how we'll break out of the while loop.
-
-        If self.compare_item == None, swap item (so that None enters the list, and list[0] becomes currently held item)
-
-        Check if robot can move right, and if so, move right. This will put us at position 1.
-
-        Compare item. If compare item returns -1, check if can move right, if true, move right. Puts us at l[1].
-
-        Compare item. If compare item returns 1, swap item.
-
-        Keep going through list making comparisons. If can_move_right returns False, check if robot can move left, if it can move left. Loop and do so until it reaches position 0?
-        
-        '''
         # if light not on, turn it on
         if not self.light_is_on():
             self.set_light_on()
@@ -168,8 +118,8 @@ class SortingRobot:
                 # if held item is equal with item at current list position, continue
                 elif self.compare_item() == 0:
                     continue
-            
-            while self.can_move_left() and self.compare_item() != None:
+            else:
+                while self.can_move_left() and self.compare_item() != None:
                     self.move_left()
             
             self.swap_item()
@@ -188,3 +138,53 @@ if __name__ == "__main__":
 
     robot.sort()
     print(robot._list)
+'''
+Sort the robot's list.
+Must sort numbers from smallest to largest.
+Doesn't return anything. Just performs the sort. The list gets returned when robot._list is printed.
+
+**Robot starts at list[0]. So if robot can move right, perform some operations.
+
+Robot needs to be able to grab the first element since the class is instantiated with None. How do I do this?
+
+if robot's item is none, swap item?
+I think at the end, the last thing we'll have to do is swap the last item to be sorted with None, so that None goes back to the current item being held. Until then, there will alway be one item in the list that is None
+
+Notes, attempt 2:
+Use light to signify if a sort happened?
+
+I can't make it do multiple loops that push it all the way back to position 0, because it has no way of knowing when to stop. With the restraints I can't tell it how many times to loop or when it should break out of the loop. So I either need to do one iteration through the whole list, or manually move left and right...
+
+Use "None" as signifier of end of list? Move None through? Placeholder for sorted item?
+
+If None is placeholder for item, that means it needs to find the smallest item on the first go. Then second, then third, etc.
+
+While light is on:
+    While robot can move right:
+        move right
+        compare items...if -1,  don't do anything but if 1, swap item
+
+        Once item is swapped, keep going until the current item gets to the end of the list
+        move the current item to the place where None is -- gotta go left
+        Move None right and swap again so that None is in the next index
+        
+
+'''
+
+'''
+Steps, attempt 1
+
+Set light on. On == true self.set_light_on
+While light is on, (while self.light_is_on) loop through the list. The light will be turned off at the end, once it is done sorting, and that is how we'll break out of the while loop.
+
+If self.compare_item == None, swap item (so that None enters the list, and list[0] becomes currently held item)
+
+Check if robot can move right, and if so, move right. This will put us at position 1.
+
+Compare item. If compare item returns -1, check if can move right, if true, move right. Puts us at l[1].
+
+Compare item. If compare item returns 1, swap item.
+
+Keep going through list making comparisons. If can_move_right returns False, check if robot can move left, if it can move left. Loop and do so until it reaches position 0?
+
+'''
